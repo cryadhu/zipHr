@@ -1,0 +1,6 @@
+{
+  "serverError": {
+    "defaultError": "Something went wrong",
+    "tryAgain": "Try again"
+  }
+}
