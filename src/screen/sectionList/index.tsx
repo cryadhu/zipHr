@@ -11,7 +11,7 @@ import SectionListItem from "../../component/sectionListItem";
 import { textColor } from "../../assets/colors";
 import { string } from "../../assets/strings";
 
-export default function SectionList({ route }: SectionListProps) {
+export default function SectionList({ route, navigation }: SectionListProps) {
   const stories = useSelector((state: StoriesListState) => state.stories);
   const [query, setQuery] = React.useState<string>("");
 
@@ -22,6 +22,7 @@ export default function SectionList({ route }: SectionListProps) {
     if (!isSectionExist()) {
       dispatch(getSections(section));
     }
+    navigation.setOptions({ title: section });
   }, []);
 
   React.useEffect(() => {}, [stories.sectionList]);

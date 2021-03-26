@@ -1,4 +1,5 @@
 import { RouteProp } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
 
 import { SectionMappedItem } from "../../api/types";
 
@@ -14,6 +15,12 @@ type RootStackParamList = {
 };
 type SectionListRouteProp = RouteProp<RootStackParamList, "SectionList">;
 
+type TopStoriesNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  "SectionList"
+>;
+
 export type SectionListProps = {
   route: SectionListRouteProp;
+  navigation: TopStoriesNavigationProp;
 };
