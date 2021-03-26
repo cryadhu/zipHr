@@ -22,7 +22,7 @@ export default function SectionList({ route, navigation }: SectionListProps) {
     if (!isSectionExist()) {
       dispatch(getSections(section));
     }
-    navigation.setOptions({ title: section });
+    navigation.setOptions({ title: section.toUpperCase() });
   }, []);
 
   React.useEffect(() => {}, [stories.sectionList]);

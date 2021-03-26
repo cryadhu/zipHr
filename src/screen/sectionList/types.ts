@@ -7,6 +7,7 @@ export type StoriesListState = {
   stories: {
     sectionList: SectionMappedItem;
     loading: boolean;
+    section: string | null;
   };
 };
 

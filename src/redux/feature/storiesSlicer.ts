@@ -13,17 +13,23 @@ export const getSections = createAsyncThunk(
 interface StoriesState {
   sectionList: SectionMappedItem;
   loading: true | false;
+  section: string | null;
 }
 
 const initialState = {
   sectionList: {},
   loading: true,
+  section: null,
 } as StoriesState;
 
 export const storiesSlicer = createSlice({
   name: "stories",
   initialState,
-  reducers: {},
+  reducers: {
+    setSection: (state, action) => {
+      state.section = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getSections.pending, (state, action) => {
       state.loading = true;
@@ -40,6 +46,6 @@ export const storiesSlicer = createSlice({
   },
 });
 
-export const {} = storiesSlicer.actions;
+export const { setSection } = storiesSlicer.actions;
 
 export default storiesSlicer.reducer;
