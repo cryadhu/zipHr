@@ -9,12 +9,15 @@ import { SectionListProps, StoriesListState } from "./types";
 import { SectionItem } from "../../api/types";
 import SectionListItem from "../../component/sectionListItem";
 import { textColor } from "../../assets/colors";
+import { string } from "../../assets/strings";
 
 export default function SectionList({ route }: SectionListProps) {
   const stories = useSelector((state: StoriesListState) => state.stories);
+  const [query, setQuery] = React.useState<string>("");
+
   const dispatch = useDispatch();
   const { section } = route.params;
-  
+
   React.useEffect(() => {
     if (!isSectionExist()) {
       dispatch(getSections(section));
@@ -23,8 +26,18 @@ export default function SectionList({ route }: SectionListProps) {
 
   React.useEffect(() => {}, [stories.sectionList]);
 
+  const onQuery = (val: string) => {
+    setQuery(val);
+  };
+
   const isSectionExist = () => {
     return stories.sectionList[section]?.length > 0;
+  };
+
+  const getFilteredData = (data: SectionItem[]) => {
+    return data.filter((item: { title: string }) =>
+      item.title.toLocaleLowerCase().includes(query.toLocaleLowerCase())
+    );
   };
 
   const renderSections = (props: { item: SectionItem }) => {
@@ -42,8 +55,20 @@ export default function SectionList({ route }: SectionListProps) {
 
   return (
     <View style={styles.container}>
+      <SearchBar
+        placeholder={string("searchBar.placeholder")}
+        onChangeText={onQuery}
+        value={query}
+        lightTheme
+        round
+        containerStyle={{
+          backgroundColor: "transparent",
+          borderWidth: 0,
+        }}
+        platform="ios"
+      />
       <FlatList
-        data={stories.sectionList[section]}
+        data={getFilteredData(stories.sectionList[section])}
         renderItem={renderSections}
         keyExtractor={(item, index) => index.toString()}
       />

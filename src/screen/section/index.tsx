@@ -6,6 +6,7 @@ import styles from "./style";
 import SECTIONS from "../../utils/sections.json";
 import SectionItem from "../../component/sectionItem";
 import TopStoriesNavigationProp from "./types";
+import { string } from "../../assets/strings";
 
 export default function Section(props: {
   navigation: TopStoriesNavigationProp;
@@ -13,7 +14,7 @@ export default function Section(props: {
   const { navigation } = props;
   const [query, setQuery] = React.useState<String>("");
 
-  const onQuery = (val: String) => {
+  const onQuery = (val: string) => {
     setQuery(val);
   };
 
@@ -34,7 +35,7 @@ export default function Section(props: {
   return (
     <View style={styles.container}>
       <SearchBar
-        placeholder="Type Here..."
+        placeholder={string("searchBar.placeholder")}
         onChangeText={onQuery}
         value={query}
         lightTheme

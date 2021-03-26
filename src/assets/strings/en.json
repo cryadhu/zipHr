@@ -2,5 +2,8 @@
   "serverError": {
     "defaultError": "Something went wrong",
     "tryAgain": "Try again"
+  },
+  "searchBar": {
+    "placeholder": "Type to search"
   }
 }
