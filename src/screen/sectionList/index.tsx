@@ -4,7 +4,7 @@ import { SearchBar } from "react-native-elements";
 import { useSelector, useDispatch } from "react-redux";
 
 import styles from "./style";
-import { getSections } from "../../redux/feature/storiesSlicer";
+import { getSections, setSection } from "../../redux/feature/storiesSlicer";
 import { SectionListProps, StoriesListState } from "./types";
 import { SectionItem } from "../../api/types";
 import SectionListItem from "../../component/sectionListItem";
@@ -23,6 +23,9 @@ export default function SectionList({ route, navigation }: SectionListProps) {
       dispatch(getSections(section));
     }
     navigation.setOptions({ title: section.toUpperCase() });
+    return () => {
+      dispatch(setSection(null));
+    };
   }, []);
 
   React.useEffect(() => {}, [stories.sectionList]);
