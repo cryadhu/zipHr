@@ -3,6 +3,7 @@ import ServiceError from "./serviceError";
 import { SectionList, ErrorResponse } from "./types";
 
 const apiKey = "dmC8nVHdVjB59nwPuCLTtLuumWaED5EF";
+
 export default class Service {
   api: ApisauceInstance;
   constructor(api: ApisauceInstance) {

@@ -10,6 +10,7 @@ import { SectionItem } from "../../api/types";
 import SectionListItem from "../../component/sectionListItem";
 import { textColor } from "../../assets/colors";
 import { string } from "../../assets/strings";
+import { getFilteredSectionList } from "../../utils/filter";
 
 export default function SectionList({ route, navigation }: SectionListProps) {
   const stories = useSelector((state: StoriesListState) => state.stories);
@@ -38,11 +39,11 @@ export default function SectionList({ route, navigation }: SectionListProps) {
     return stories.sectionList[section]?.length > 0;
   };
 
-  const getFilteredData = (data: SectionItem[]) => {
-    return data.filter((item: { title: string }) =>
-      item.title.toLocaleLowerCase().includes(query.toLocaleLowerCase())
-    );
-  };
+  // const getFilteredData = (data: SectionItem[]) => {
+  //   return data.filter((item: { title: string }) =>
+  //     item.title.toLocaleLowerCase().includes(query.toLocaleLowerCase())
+  //   );
+  // };
 
   const renderSections = (props: { item: SectionItem }) => {
     const { item } = props;
@@ -72,7 +73,7 @@ export default function SectionList({ route, navigation }: SectionListProps) {
         platform="ios"
       />
       <FlatList
-        data={getFilteredData(stories.sectionList[section])}
+        data={getFilteredSectionList(query, stories.sectionList[section])}
         renderItem={renderSections}
         keyExtractor={(item, index) => index.toString()}
       />

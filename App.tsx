@@ -8,7 +8,7 @@ import store from "./src/redux/store";
 import RootNavigation from "./src/navigation/rootNavigation";
 
 export default function App() {
-  let persistor = persistStore(store);
+  const persistor = persistStore(store);
 
   return (
     <Provider store={store}>

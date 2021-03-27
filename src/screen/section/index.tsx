@@ -10,12 +10,13 @@ import TopStoriesNavigationProp from "./types";
 import { string } from "../../assets/strings";
 import { StoriesListState } from "../sectionList/types";
 import { setSection } from "../../redux/feature/storiesSlicer";
+import { getFilteredSection } from "../../utils/filter";
 
 export default function Section(props: {
   navigation: TopStoriesNavigationProp;
 }) {
   const { navigation } = props;
-  const [query, setQuery] = React.useState<String>("");
+  const [query, setQuery] = React.useState<string>("");
   const section = useSelector(
     (state: StoriesListState) => state.stories.section
   );
@@ -36,20 +37,17 @@ export default function Section(props: {
     navigateToSection(section);
   };
 
-  React.useEffect(()=>{
-    if(section){
+  React.useEffect(() => {
+    if (section) {
       navigateToSection(section);
     }
-  },[section])
+  }, [section]);
 
   const renderSections = (props: { item: String }) => {
     const { item } = props;
     return <SectionItem item={item} onPress={onSectionSelected} />;
   };
 
-  const data = SECTIONS.filter((item) =>
-    item.toLocaleLowerCase().includes(query.toLocaleLowerCase())
-  );
   return (
     <View style={styles.container}>
       <SearchBar
@@ -65,7 +63,7 @@ export default function Section(props: {
         platform="ios"
       />
       <FlatList
-        data={data}
+        data={getFilteredSection(query, SECTIONS)}
         renderItem={renderSections}
         numColumns={2}
         keyExtractor={(item, index) => index.toString()}
