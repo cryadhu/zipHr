@@ -1,5 +1,6 @@
 import { create } from "apisauce";
+import { BASE_URL } from "../utils/constants";
 
 export default create({
-  baseURL: "https://api.nytimes.com/svc/topstories/v2",
+  baseURL: BASE_URL,
 });

@@ -1,8 +1,7 @@
 import { ApiResponse, ApisauceInstance } from "apisauce";
 import ServiceError from "./serviceError";
 import { SectionList, ErrorResponse } from "./types";
-
-const apiKey = "dmC8nVHdVjB59nwPuCLTtLuumWaED5EF";
+import { API_KEY } from "../utils/constants";
 
 export default class Service {
   api: ApisauceInstance;
@@ -21,7 +20,7 @@ export default class Service {
   async fetchSectionList(section: String) {
     try {
       const data = await this.api.get<SectionList>(
-        `${section}.json?api-key=${apiKey}`
+        `${section}.json?api-key=${API_KEY}`
       );
       return this.handleResponse(data?.data!);
     } catch (error) {
